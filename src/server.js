@@ -1,5 +1,9 @@
 import express from "express";
 import morgan from "morgan";
+import globalRouter from "./routers/globalRouter";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
+
 const PORT = 4000;
 
 const app = express();
@@ -7,27 +11,8 @@ const app = express();
 const logger = morgan("dev");
 app.use(logger);
 
-const globalRouter = express.Router();
 
-const handleHome = (req, res) => res.send("Home");
-
-globalRouter.get("/", handleHome);
-
-
-const userRouter = express.Router();
-
-const handleEditUser = (req, res) => res.send("EditUser");
-
-userRouter.get("/edit", handleEditUser);
-
-
-const videoRouter = express.Router();
-
-const handleWatchVideo = (req, res) => res.send("WatchVideo");
-
-videoRouter.get("/watch", handleWatchVideo);
-
-
+//서버를 시작하도록 하는 어플리케이션
 app.use("/",globalRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
