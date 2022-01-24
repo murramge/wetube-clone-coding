@@ -11,7 +11,7 @@ app.set("view engine", "pug");
 
 const logger = morgan("dev");
 app.use(logger);
-
+app.use(express.urlencoded({ extended: true}))
 //서버를 시작하도록 하는 어플리케이션
 app.use("/",globalRouter);
 app.use("/videos", videoRouter);
