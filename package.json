@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/murramge/wetube-clone-coding#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.2",
     "mongoose": "^6.1.7",
     "morgan": "^1.10.0",
