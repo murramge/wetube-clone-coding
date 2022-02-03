@@ -54,17 +54,11 @@ export const finishGithublogin = async (req, res) => {
             if (!emailObj) {
                 return res.redirect("/login");
             }
-            const existingUser = await User.findOne({email: emailObj.email});
-            if(existingUser){
-                //현재 존재하는 유저 이메일. 이 유저가 깃헙으로 로그인했든, password로 계정을 생성했든 신경 쓰지 않음
-                //핵심은 해당 email을 가진 user가 이미 있는 지 찾아보는 것
-                req.session.loggedIn = true;
-                req.session.user = existingUser;
-                return res.redirect("/");
-            }
-            else {
-                //해당 이메일로 user가 없으니까 계정을 생성해라
-                const user = await User.create({
+            let user = await User.findOne({email: emailObj.email});
+            if(!user){
+                   //해당 이메일로 user가 없으니까 계정을 생성해라
+                user = await User.create({
+                    avatarUrl: userData.avatar_url,
                     name: userData.name ? userData.name:userData.login,
                     username:userData.login,
                     email:emailObj.email,
@@ -72,10 +66,10 @@ export const finishGithublogin = async (req, res) => {
                     socialOnly: true,
                     location:userData.location,
                 });
-                req.session.loggedIn = true;
-                req.session.user = user;
-                return res.redirect("/");
             }
+            req.session.loggedIn = true;
+            req.session.user = user;
+            return res.redirect("/");
         }
     else {
         return res.redirect("/login");
@@ -125,7 +119,7 @@ export const postLogin = async(req, res) => {
     //계정이 존재하는지, 비밀번호가 정확한지 
     const {username,password} = req.body;
     const pageTitle = "Login";
-    const user = await User.findOne({username});
+    const user = await User.findOne({username, socialOnly:false});
     if(!user) {
         return res.status(400).render("login", {pageTitle, errorMessage:"An account with this username/password does not exists"})
     }
@@ -143,7 +137,9 @@ export const postLogin = async(req, res) => {
 
 
 export const edit = (req, res) => res.send("user edit");
-export const remove = (req, res) => res.send("user remove");
 
-export const logout = (req, res) => res.send("logout");
+export const logout = (req, res) => {
+    req.session.destroy();
+    return res.redirect("/");
+};
 export const see = (req, res) => res.send("see user");
