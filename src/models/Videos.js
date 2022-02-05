@@ -10,6 +10,7 @@ import mongoose from "mongoose";
     views: { type: Number, default: 0, required: true },
     rating: { type: Number, default: 0, required: true },
   },
+  owner: {type:mongoose.Schema.Types.ObjectId, required: true, ref:"User"},
 });
 videoSchema.static("formatHashtags", function (hashtags) {
   return hashtags
