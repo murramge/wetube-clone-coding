@@ -17,5 +17,5 @@ videoSchema.static("formatHashtags", function (hashtags) {
     .split(",")
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });
-const Video = mongoose.model("Video", videoSchema);
+const Video = mongoose.model("Videos", videoSchema);
 export default Video;
