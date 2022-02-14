@@ -207,6 +207,7 @@ export const postEdit = async (req, res) => {
 }
 export const getChangePassword = (req, res) => {
     if(req.session.user.socialOnly === true){
+        req.flash("error", "Can't change password");
         return res.redirect("/")
     }
     return res.render("users/change-password", {PageTitle: "Change Password"});
@@ -235,11 +236,13 @@ export const postChangePassword = async (req, res) => {
     user.password = newPassword;
     await user.save();
     req.session.user.password = user.password;
+    req.flash("info", "Password updated");
     return res.redirect("/users/logout");
 
 }
 export const logout = (req, res) => {
     req.session.destroy();
+    req.flash("info", "Bye Bye");
     return res.redirect("/");
 };
 export const see = async(req, res) => {
@@ -253,6 +256,7 @@ export const see = async(req, res) => {
     });
 
     if(!user){
+        
         return res.status(404).render("404", {pageTitle:"User not found"});
     }
     return res.render("users/profile",{pageTitle:`${user.name}의 Profile`, user})
