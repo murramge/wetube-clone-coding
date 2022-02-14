@@ -13,7 +13,11 @@ import apiRouter from "./routers/apiRouter";
 const app = express();
 app.set("views" , process.cwd() + "/src/views")
 app.set("view engine", "pug");
-
+app.use((req, res, next) => {
+    res.header("Cross-Origin-Embedder-Policy", "require-corp");
+    res.header("Cross-Origin-Opener-Policy", "same-origin");
+    next();
+    });
 const logger = morgan("dev");
 app.use(logger);
 app.use(express.urlencoded({ extended: true}))
@@ -33,7 +37,6 @@ app.use("/",rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 app.use("/api", apiRouter);
-
 
 
 
