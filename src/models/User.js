@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import bcrypt from "bcrypt";
 const userSchema = new mongoose.Schema ({
     email: {type:String, required:true, unique: true},
@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema ({
     password: {type:String},
     name: {type:String, required: true},
     location: String,
+    comments: [{type:mongoose.Schema.Types.ObjectId, ref:"Comment"}],
     videos: [{ type: mongoose.Schema.Types.ObjectId, ref:"Videos"}],
+
 })
 
 userSchema.pre('save', async function() {

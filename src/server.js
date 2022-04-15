@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 const logger = morgan("dev");
 app.use(logger);
 app.use(express.urlencoded({ extended: true}))
+app.use(express.json()); //json이 string을 object로 변환해줌
 //서버를 시작하도록 하는 어플리케이션
 
 app.use(session({
