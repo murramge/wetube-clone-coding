@@ -1,7 +1,7 @@
 const videoContainer = document.getElementById("videoContainer");
  const form = document.getElementById("commentForm");
  const videocomments = document.getElementsByClassName("video__comments");
- const deleteBtn = document.querySelectorAll(".deleteBtn");
+ const delBtns = document.querySelectorAll(".deleteBtn");
 
   const addComment = (text,newCommentId) =>{
     const videoComments = document.querySelector(".video__comments ul");
@@ -23,11 +23,7 @@ const videoContainer = document.getElementById("videoContainer");
     console.log(newComment);
     videoComments.prepend(newComment);
   }
-  const deleteComment = (event) => {
-    const commentContainer = document.querySelector(".video__comments ul");
-    const commentList = event.target.parentNode;
-    commentContainer.removeChild(commentList);
-  }
+
  const handleSubmit = async (event) => {
    event.preventDefault();
    const textarea = form.querySelector("textarea");
@@ -51,29 +47,21 @@ const videoContainer = document.getElementById("videoContainer");
   }
 
 };
-const handleDelete = async (event) => {
-  const commentList = event.target.parentNode;
-  const commentId = commentList.dataset.id;
-  const videoId = videoContainer.dataset.id;
-  const response = await fetch(`/api/comments/${commentId}/delete`,{
-      method:"DELETE",
-      headers: {
-        "Content-Type" : "application/json"
-      },
-      body: JSON.stringify({
-        videoId,
-      })
-  });
-  if (response.status === 201) {
-    deleteComment(event);
+const deleteCom = async(event)=>{
+  const commentId = video__comment.dataset.commentid;
+  
+   const {status} = await fetch(`/api/videos/comment/${commentId}/delete`,{
+        method:"DELETE"
+    });
+    if(status==201){
+      const li=event.target.parentElement;
+      li.remove();
   }
-  if (response.status === 403) {
-    alert("댓글 주인이 아님");
+    
   }
-} 
 if (form) {
   form.addEventListener("submit", handleSubmit);
 }
-for (let i =0; i<deleteBtn.length; i++) {
-  deleteBtn[i].addEventListener("click",handleDelete);
+for(let i=0;i<delBtns.length;i++){
+  delBtns[i].addEventListener("click",deleteCom);
 }
