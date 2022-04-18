@@ -1,7 +1,8 @@
 const videoContainer = document.getElementById("videoContainer");
- const form = document.getElementById("commentForm");
- const videocomments = document.getElementsByClassName("video__comments");
- const delBtns = document.querySelectorAll(".deleteBtn");
+const video__comment = document.querySelector(".video__comment");
+const commentContainer = document.getElementById("commentContainer");
+const form = document.getElementById("commentForm");
+const delBtns = document.querySelectorAll(".deleteCommentBtn");
 
   const addComment = (text,newCommentId) =>{
     const videoComments = document.querySelector(".video__comments ul");
@@ -24,44 +25,44 @@ const videoContainer = document.getElementById("videoContainer");
     videoComments.prepend(newComment);
   }
 
- const handleSubmit = async (event) => {
-   event.preventDefault();
-   const textarea = form.querySelector("textarea");
-   const text = textarea.value;
-   const videoId = videoContainer.dataset.id;
-   if (text === "") {
-     return;
-   }
-   const response = await fetch(`/api/videos/${videoId}/comment`, {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json",
-       //string을 object로 바꾸어주기 위해서 json을 사용하도록 함
-    },
-    body: JSON.stringify({ text }),
-  });
-  textarea.value = "";
-  const {newCommentId} = await response.json();
-  if (response.status === 201) {
-    addComment(text,newCommentId);
-  }
-
-};
-const deleteCom = async(event)=>{
-  const commentId = video__comment.dataset.commentid;
-  
-   const {status} = await fetch(`/api/videos/comment/${commentId}/delete`,{
-        method:"DELETE"
-    });
-    if(status==201){
-      const li=event.target.parentElement;
-      li.remove();
-  }
+  const deleteCom = async(event)=>{
+    const commentId = video__comment.dataset.commentid;
     
-  }
-if (form) {
-  form.addEventListener("submit", handleSubmit);
-}
-for(let i=0;i<delBtns.length;i++){
-  delBtns[i].addEventListener("click",deleteCom);
-}
+     const {status} = await fetch(`/api/videos/comment/${commentId}/delete`,{
+          method:"DELETE"
+      });
+      if(status==201){
+        const li=event.target.parentElement;
+        li.remove();
+    }
+      
+    }
+    const handleSubmit = async(event) => {
+      event.preventDefault();
+      const textarea = form.querySelector("textarea");
+      const text = textarea.value;
+      const videoId = videoContainer.dataset.videoid;
+      if(text===""){
+          return;
+      }
+      const response = await fetch(`/api/videos/${videoId}/comment`,{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json",
+          },
+          body:JSON.stringify({text}),
+      });
+      if(response.status=== 201){
+        textarea.value="";
+        const {newCommentId} = await response.json();
+        addComment(text,newCommentId);
+    
+      }
+    };
+    if(form){
+        form.addEventListener("submit", handleSubmit);
+    }
+    
+    for(let i=0;i<delBtns.length;i++){
+      delBtns[i].addEventListener("click",deleteCom);
+    }

@@ -139,6 +139,6 @@ export const createComment = async (req, res) => {
 }
 export const deleteComment = async(req,res)=>{
   const {params:{id}} = req;
-  await Comment.findOneAndDelete(id);     
+  const comment = await Comment.findOneAndDelete(id);     
   return res.sendStatus(201);
 };
