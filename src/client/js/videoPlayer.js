@@ -135,7 +135,7 @@ const video = document.querySelector("video");
  };
 
  const handleEnded = () => {
-    const { id } = videoContainer.dataset;
+    const id = videoContainer.dataset.videoid;
     fetch(`/api/videos/${id}/view`, {
       method: "POST",
     });
