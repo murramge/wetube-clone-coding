@@ -5,7 +5,7 @@
 
  > 2022.01-2022.02
 
-## Project History
+## 📝 Project History 📝
 ##### You can see more about the project. ->  <a href="https://www.notion.so/daram-daram/wetube-note-5ce971e7d82c4f0fa62f07a469e6a640"><img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white&link=https://www.notion.so/daram-daram/wetube-note-5ce971e7d82c4f0fa62f07a469e6a640"/>
 ## Explanation
   - nomadcoders의 유튜브 클론코딩을 보고 nodejs와 express를 공부하는 목적으로 만든 clonecoding 프로젝트
@@ -50,7 +50,7 @@
        /video/:id/delete -> 만든 비디오를 삭제할 수 있도록 한 라우터이다.
        /video/upload -> 비디오를 업로드 할 수 있도록 한 라우터이다.
 
-### Preview
+## Preview
 
 <img src="https://user-images.githubusercontent.com/60298173/165348645-a1a9e476-cfab-44f1-8ebe-c1c72b70ebc3.png" width="1200" height="400">
 
