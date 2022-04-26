@@ -57,8 +57,8 @@
 > wetube의 메인 화면이다
 <div style="display:flex">
 <div style="display:inline-block">
-<img src="https://user-images.githubusercontent.com/60298173/165348597-0a77b298-8f35-4202-b5f4-55bbb86296b7.png" width="450" height="350">
- <img src="https://user-images.githubusercontent.com/60298173/165348610-ecdcb721-f699-4078-8f2e-614fa3bdf1fb.png" width="450" height="350">
+<img src="https://user-images.githubusercontent.com/60298173/165348597-0a77b298-8f35-4202-b5f4-55bbb86296b7.png" width="350" height="350">
+ <img src="https://user-images.githubusercontent.com/60298173/165348610-ecdcb721-f699-4078-8f2e-614fa3bdf1fb.png" width="350" height="350">
 </div>
 </div>
 
@@ -69,8 +69,8 @@
 > 유저의 정보를 변경하는 edituser 화면이다.
 <div style="display:flex">
 <div style="display:inline-block">
-<img src="https://user-images.githubusercontent.com/60298173/165348505-18324ed0-630a-4097-866c-0be2c9b25524.png" width="450" height="350">
- <img src="https://user-images.githubusercontent.com/60298173/165348591-51309910-c108-476b-8ba1-9bfdf97ccf3f.png" width="450" height="350">
+<img src="https://user-images.githubusercontent.com/60298173/165348505-18324ed0-630a-4097-866c-0be2c9b25524.png" width="350" height="350">
+ <img src="https://user-images.githubusercontent.com/60298173/165348591-51309910-c108-476b-8ba1-9bfdf97ccf3f.png" width="350" height="350">
 </div>
  </div>
 
